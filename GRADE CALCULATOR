@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class GradeCalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("--- Student Grade Calculator ---");
+
+        // 1. Input: Number of subjects
+        System.out.print("Enter the total number of subjects: ");
+        int numSubjects = scanner.nextInt();
+
+        // Check for a valid number of subjects
+        if (numSubjects <= 0) {
+            System.out.println("Please enter a valid number of subjects.");
+            scanner.close();
+            return;
+        }
+
+        int totalMarks = 0;
+
+        // Loop to get marks for each subject
+        for (int i = 1; i <= numSubjects; i++) {
+            while (true) {
+                System.out.printf("Enter marks obtained in Subject %d (out of 100): ", i);
+                int marks = scanner.nextInt();
+                
+                // Input validation for marks
+                if (marks >= 0 && marks <= 100) {
+                    totalMarks += marks; // 2. Calculate Total Marks
+                    break; // Exit the validation loop and move to the next subject
+                } else {
+                    System.out.println("Invalid marks. Please enter a value between 0 and 100.");
+                }
+            }
+        }
+
+        // 3. Calculate Average Percentage
+        double averagePercentage = (double) totalMarks / numSubjects;
+
+        // 4. Grade Calculation
+        String grade;
+        if (averagePercentage >= 90) {
+            grade = "A+";
+        } else if (averagePercentage >= 80) {
+            grade = "A";
+        } else if (averagePercentage >= 70) {
+            grade = "B";
+        } else if (averagePercentage >= 60) {
+            grade = "C";
+        } else if (averagePercentage >= 50) {
+            grade = "D";
+        } else {
+            grade = "F (Fail)";
+        }
+
+        // 5. Display Results
+        System.out.println("\n---------- 📊 Results ----------");
+        System.out.println("Total Marks Obtained: " + totalMarks + " / " + (numSubjects * 100));
+        System.out.printf("Average Percentage: %.2f%%\n", averagePercentage);
+        System.out.println("Final Grade: " + grade);
+        System.out.println("---------------------------------");
+
+        scanner.close();
+    }
+}
